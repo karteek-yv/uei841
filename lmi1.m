@@ -1,12 +1,9 @@
-%function lmi1
+%LMI solver using inbuilt solver: lmilab
 clear all;
 close all;
-%[A,B,C,D]=tf2ss([1],[2 3 4]);
-%[A,B,C,D]=tf2ss([1],[1 -2 3 4]);
-%A=[-1 -2 1;3 2 1; 1 -2 -1];
-%[A,B,C,D]=tf2ss([1],[1 -2 1]);
-[N,D]=zp2tf([],[-0.5,-1,-1+i,-1-i],1);
-[A,B,C,D]=tf2ss(N,D);
+%[N,D]=zp2tf([],[-0.5,-1,-1+i,-1-i],1);
+%[A,B,C,D]=tf2ss(N,D);
+A=[0 4;-8 -12];
 setlmis([]) 
 X=lmivar(1,[max(size(A)) 1]) 
 
@@ -20,7 +17,7 @@ lmiterm([2 1 1 0],1)
 
 lmis = getlmis;
 [tmin,xfeas] = feasp(lmis);
-P1 = dec2mat(lmis,xfeas,X);
+P1 = dec2mat(lmis,xfeas,X)
 tmin
 
 %end
