@@ -11,6 +11,8 @@ close all;
 A=[0 4;-8 -12];
 sz=max(size(A));
 P = sdpvar(sz,sz);
-F=[P>=eye(sz)*1e-8,A'*P + P*A <=-eye(sz)]
+pd=eye(sz)*eps;
+F=[P>=pd,A'*P + P*A <=-pd]
 tt=optimize(F)
 P1=double(P)
+eigenvalues=eig(P1+P1')
